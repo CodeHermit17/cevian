@@ -1,0 +1,44 @@
+[workspace]
+
+name = "cevian"
+description = "A General Physics Library."
+authors = ["KP"]
+channels = ["conda-forge"]
+version = "0.1.0-dev"
+platforms = ["linux-64"]
+requires-pixi = ">=0.67.2"
+
+##project running dependencies
+
+[dependencies]
+python = ">=3.12.3"
+
+##specific dependencies
+
+[feature.build.dependencies]
+cmake = ">=3.38.3"
+ninja = "*"
+
+[feature.tests.dependencies]
+
+##  tasks
+[feature.build.tasks]
+
+clean.cmd = "rm -rf build"
+clean.description = "Remove build artifacts"
+
+## clang-format
+
+[feature.clang-format.dependencies]
+git = "*"
+clang-format = "*"
+
+[feature.clang-format.tasks]
+format.cmd = "git ls-files '*.cpp' '*.h' | xargs clang-format -i --style=file"
+format.description = "Format tracked C++ source and header files in place."
+format-dry-error.cmd = "git ls-files '*.cpp' '*.h' | xargs clang-format --style=file --Werror --dry-run"
+format-dry-error.description = "Check C++ formatting and fail if any file needs changes."
+
+[environments]
+default = { features = ["build", "tests"], solve-group = "default" }
+lint = { features = ["clang-format"], solve-group = "default" }

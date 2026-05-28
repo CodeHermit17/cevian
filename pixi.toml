@@ -11,19 +11,24 @@ requires-pixi = ">=0.67.2"
 ##project running dependencies
 
 [dependencies]
-python = ">=3.12.3"
+python = "3.12.*"
+pip = ">=26.1.1,<27"
 
 ##specific dependencies
 
 [feature.build.dependencies]
-cmake = ">=3.38.3"
+cmake = ">=3.28.3"
 ninja = "*"
+nanobind = ">=2.0"
+python-build = ">=1.5.0,<2"
+scikit-build-core = ">=0.12.1,<0.13"
 
 [feature.tests.dependencies]
 
 ##  tasks
 [feature.build.tasks]
-
+build.cmd = "cmake -S . -B build -G Ninja && cmake --build build"
+build.description = "Build C++ extensions"
 clean.cmd = "rm -rf build"
 clean.description = "Remove build artifacts"
 

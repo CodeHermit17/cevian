@@ -1,0 +1,26 @@
+name: format
+
+on: [ push, pull_request ]
+
+permissions:
+  contents: read  # to fetch code (actions/checkout)
+
+jobs:
+  format:
+    name: Check formatting
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        environment: [lint]
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: prefix-dev/setup-pixi@v0.9.6
+        with:
+          pixi-version: v0.67.2
+          cache: true
+          environments: ${{ matrix.environment }}
+      - name: Check for formatting violations
+        run: |
+          pixi run check-formatting
+          echo "Please execute 'pixi run format' to fix any errors." 

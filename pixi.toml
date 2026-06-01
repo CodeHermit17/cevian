@@ -26,6 +26,7 @@ scikit-build-core = ">=0.12.1,<0.13"
 [feature.tests.dependencies]
 
 ##  tasks
+
 [feature.build.tasks]
 build.cmd = "cmake -S . -B build -G Ninja && cmake --build build"
 build.description = "Build C++ extensions"
@@ -41,8 +42,8 @@ clang-format = "*"
 [feature.clang-format.tasks]
 format.cmd = "git ls-files '*.cpp' '*.h' | xargs clang-format -i --style=file"
 format.description = "Format tracked C++ source and header files in place."
-format-dry-error.cmd = "git ls-files '*.cpp' '*.h' | xargs clang-format --style=file --Werror --dry-run"
-format-dry-error.description = "Check C++ formatting and fail if any file needs changes."
+check-formatting.cmd = "git ls-files '*.cpp' '*.h' | xargs clang-format --style=file --Werror --dry-run"
+check-formatting.description = "Check C++ formatting and fail if any file needs changes."
 
 [environments]
 default = { features = ["build", "tests"], solve-group = "default" }

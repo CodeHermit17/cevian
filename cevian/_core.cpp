@@ -1,5 +1,3 @@
 #include <nanobind/nanobind.h>
 
-NB_MODULE(_core, m) {
-    m.doc() = "Cevian core module";
-}
+NB_MODULE(_core, m) { m.doc() = "Cevian core module"; }

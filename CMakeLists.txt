@@ -4,8 +4,18 @@ project(cevian LANGUAGES CXX CUDA)
 # cevian is restricted to C++17
 set(CMAKE_CXX_STANDARD 17)  
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CUDA_STANDARD 17)
-set(CMAKE_CUDA_STANDARD_REQUIRED ON)
+
+# Enable CUDA only if toolkit is available
+include(CheckLanguage)
+check_language(CUDA)
+if(CMAKE_CUDA_COMPILER)
+    enable_language(CUDA)
+    set(CMAKE_CUDA_STANDARD 17)
+    set(CMAKE_CUDA_STANDARD_REQUIRED ON)
+    message(STATUS "CUDA enabled")
+else()
+    message(STATUS "CUDA not found, building CPU only")
+endif()
 
 find_package(Python 3.12 REQUIRED COMPONENTS Interpreter Development.Module)
 

@@ -11,6 +11,9 @@ version = "0.1.0-dev"
 requires-python = ">=3.12.2"
 dependencies = [ ]
 
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
 [project.optional-dependencies]
 
 [tool.scikit-build]

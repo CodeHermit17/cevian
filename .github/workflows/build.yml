@@ -14,13 +14,13 @@ jobs:
       matrix:
         environment: [default]
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v4
       - uses: prefix-dev/setup-pixi@v0.9.6
         with:
           pixi-version: v0.67.2
           cache: true
           environments: ${{ matrix.environment }}
       - name: Build the project
-        run: |
-          pixi run build 
-          echo "Build completed successfully."
+        run: pixi run build
+      - name: Running Tests
+        run: pixi run test

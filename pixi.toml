@@ -24,6 +24,8 @@ python-build = ">=1.5.0,<2"
 scikit-build-core = ">=0.12.1,<0.13"
 
 [feature.tests.dependencies]
+pytest = ">=8.0"
+hypothesis = ">=6.0"
 
 ##  tasks
 
@@ -32,6 +34,10 @@ build.cmd = "cmake -S . -B build -G Ninja && cmake --build build"
 build.description = "Build C++ extensions"
 clean.cmd = "rm -rf build"
 clean.description = "Remove build artifacts"
+
+[feature.tests.tasks]
+test.cmd = "pytest tests/"
+test.description = "Run test suite"
 
 ## clang-format
 
